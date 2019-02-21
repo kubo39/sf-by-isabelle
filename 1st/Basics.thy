@@ -90,5 +90,9 @@ fun exp :: "nat \<Rightarrow> nat" where
 | "exp base (Suc p) = mult base (exp base p)"
 *)
 
+theorem plus_0_n: "\<forall> n::nat. 0 + n = n" by simp
+theorem plus_1_l: "\<forall> n::nat. 1 + n = Suc n" by simp
+theorem mult_0_l: "\<forall> n::nat. 0 * n = 0" by simp
+
 end
 
