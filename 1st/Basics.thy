@@ -94,5 +94,8 @@ theorem plus_0_n: "\<forall> n::nat. 0 + n = n" by simp
 theorem plus_1_l: "\<forall> n::nat. 1 + n = Suc n" by simp
 theorem mult_0_l: "\<forall> n::nat. 0 * n = 0" by simp
 
+theorem plus_id_example: "\<forall> n m::nat. n = m \<longrightarrow> n + n = m + m" by simp
+theorem mult_0_plus: "\<forall> n m::nat. (0 + n) * m = n * m" by simp
+
 end
 
