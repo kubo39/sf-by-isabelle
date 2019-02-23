@@ -43,4 +43,11 @@ fun combine :: "'a list \<Rightarrow> 'b list \<Rightarrow> ('a * 'b) list" wher
 
 value "combine (Cons (1::nat) (Cons (2::nat) Nil)) (Cons (True::bool) (Cons (False::bool) Nil))"
 
+
+fun do3times :: "('X \<Rightarrow> 'X) \<Rightarrow> 'X \<Rightarrow> 'X" where
+  "do3times f n = f (f (f n))"
+
+value "do3times minustwo 9" (* "3" :: "nat" *)
+(* lemma test_do3times: "do3times minustwo 9 = 3" *)
+
 end
