@@ -14,11 +14,27 @@ value "repeat (4::nat) 2" (* Cons (4::nat) (Cons (4::nat) Nil)" *)
 (* value "repeat (4::nat) 2 = Cons (4::nat) (Cons (4::nat) Nil)" *)
 (* lemma test_repeat1: "repeat (4::nat) 2 = Cons (4::nat) (Cons (4::nat) Nil)" *)
 
+fun app :: "'a list \<Rightarrow> 'a list \<Rightarrow> 'a list" where
+  "app Nil ys = ys"
+| "app (Cons x xs) ys = Cons x (app xs ys)"
+
+fun rev :: "'a list \<Rightarrow> 'a list" where
+  "rev Nil = Nil"
+| "rev (Cons x xs) = app (rev xs) (Cons x Nil)"
+
+fun length :: "'a list \<Rightarrow> nat" where
+  "length Nil = 0"
+| "length (Cons x xs) = Suc (length xs)"
+
+lemma test_rev1: "rev (Cons 1 (Cons 2 Nil)) = Cons 2 (Cons 1 Nil)" by simp
+lemma test_rev2: "rev (Cons True Nil) = Cons True Nil" by simp
+lemma test_length1: "length (Cons 1 (Cons 2 (Cons 3 Nil))) = 3" by simp
+
 fun fst :: "'X * 'Y \<Rightarrow> 'X" where "fst (x, y) = x"
-lemma test_fst1: "fst (3::nat, 4::nat) = 3" by simp
+lemma test_fst1: "fst (3, 4) = 3" by simp
 
 fun snd :: "'X * 'Y \<Rightarrow> 'Y" where "snd (x, y) = y"
-lemma test_snd1: "snd (3::nat, 4::nat) = 4" by simp
+lemma test_snd1: "snd (3, 4) = 4" by simp
 
 fun combine :: "'a list \<Rightarrow> 'b list \<Rightarrow> ('a * 'b) list" where
   "combine Nil _ = Nil"
