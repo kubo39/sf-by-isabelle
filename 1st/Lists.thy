@@ -93,10 +93,11 @@ theorem app_length: "length (xs @ ys) = (length xs) + (length ys)"
    apply (simp_all)
   done
 
-(* theorem rev_length_firsttry: "\<forall> xs::natlist. length (rev xs) = length xs" *)
-(* theorem rev_length_firsttry: "length (rev xs) = length xs"
+(* theorem rev_length: "\<forall> xs::natlist. length (rev xs) = length xs" *)
+theorem rev_length: "length (rev xs) = length xs"
   apply (induct xs)
-  apply (auto)
-*)
+   apply (simp)
+  apply (simp add: app_length)
+  done
 
 end
