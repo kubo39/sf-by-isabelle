@@ -54,4 +54,17 @@ fun do3times :: "('X \<Rightarrow> 'X) \<Rightarrow> 'X \<Rightarrow> 'X" where
 value "do3times minustwo 9" (* "3" :: "nat" *)
 (* lemma test_do3times: "do3times minustwo 9 = 3" *)
 
+
+fun filter :: "('a \<Rightarrow> bool) \<Rightarrow> 'a list \<Rightarrow> 'a list" where
+  "filter _ [] = []"
+| "filter f (x # xs) = (case f x of True \<Rightarrow> x # (filter f xs) | False \<Rightarrow> filter f xs)"
+
+value "filter evenb (1 # 2 # 3 # 4 # [])"
+(* lemma test_filter1: "filter evenb (1 # 2 # 3 # 4 # []) = (2 # 4 # [])" *)
+
+fun countoddmembers' :: "nat list \<Rightarrow> nat" where
+  "countoddmembers' xs = length (filter oddb xs)"
+
+(* lemma test_countoddmembers: "countoddmembers' (1 # 0 # 3 # 1 # 4 # 5 # []) = 4" *)
+
 end
