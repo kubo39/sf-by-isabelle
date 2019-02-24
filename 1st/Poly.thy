@@ -75,4 +75,10 @@ value "map (plus 3) (1 # 2 # [])"
 
 (* lemma test_map2: "map oddb (2 # 1 # 2 # 5 # []) = (False # True # False # True # [])" *)
 
+fun fold :: "('a \<Rightarrow> 'b \<Rightarrow> 'b) \<Rightarrow> 'a list \<Rightarrow> 'b \<Rightarrow> 'b" where
+  "fold _ [] b = b"
+| "fold f (x # xs) b = f x (fold f xs b)"
+
+value "fold plus (1 # 2 # 3 # 4 # []) 0"
+
 end
