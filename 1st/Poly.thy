@@ -67,4 +67,12 @@ fun countoddmembers' :: "nat list \<Rightarrow> nat" where
 
 (* lemma test_countoddmembers: "countoddmembers' (1 # 0 # 3 # 1 # 4 # 5 # []) = 4" *)
 
+fun map :: "('a \<Rightarrow> 'b) \<Rightarrow> 'a list \<Rightarrow> 'b list" where
+  "map _ [] = []"
+| "map f (x # xs) = (f x) # (map f xs)"
+
+value "map (plus 3) (1 # 2 # [])"
+
+(* lemma test_map2: "map oddb (2 # 1 # 2 # 5 # []) = (False # True # False # True # [])" *)
+
 end
