@@ -46,6 +46,26 @@ lemma test_orb5: "False || False || True = True"
   apply (simp)
   done
 
+fun nandb :: "bool \<Rightarrow> bool \<Rightarrow> bool" where
+  "nandb False _ = True"
+| "nandb True b2 = negb b2"
+
+lemma test_nandb1: "nandb True False = True" by simp
+lemma test_nandb2: "nandb False False = True" by simp
+lemma test_nandb3: "nandb False True = True" by simp
+lemma test_nandb4: "nandb True True = False" by simp
+
+fun andb3 :: "bool \<Rightarrow> bool \<Rightarrow> bool \<Rightarrow> bool" where
+  "andb3 False _ _ = False"
+| "andb3 True False _ = False"
+| "andb3 True True b3 = b3"
+
+lemma test_andb31: "andb3 True True True = True" by simp
+lemma test_andb32: "andb3 False True True = False" by simp
+lemma test_andb33: "andb3 True False True = False" by simp
+lemma test_andb34: "andb3 True True False = False" by simp
+
+
 fun pred :: "nat \<Rightarrow> nat" where
   "pred 0 = 0"
 | "pred (Suc n') = n'"
@@ -95,11 +115,60 @@ fun exp :: "nat \<Rightarrow> nat" where
 | "exp base (Suc p) = mult base (exp base p)"
 *)
 
+fun factorial :: "nat \<Rightarrow> nat" where
+  "factorial 0 = 1"
+| "factorial (Suc n') = mult (Suc n') (factorial n')"
+
+(* lemma test_factorial1: "factorial 3 = 6" *)
+lemma test_factorial1: "factorial (Suc (Suc 1)) = 6" by simp
+
+(* n = m *)
+fun beq_nat :: "nat \<Rightarrow> nat \<Rightarrow> bool" where
+  "beq_nat 0 0 = True"
+| "beq_nat 0 (Suc m') = False"
+| "beq_nat (Suc n') 0 = False"
+| "beq_nat (Suc n') (Suc m') = beq_nat n' m'"
+
+(* n \<le> m *)
+fun leb :: "nat \<Rightarrow> nat \<Rightarrow> bool" where
+  "leb 0 _ = True"
+| "leb (Suc n') 0 = False"
+| "leb (Suc n') (Suc m') = leb n' m'"
+
+(* lemma test_leb1: "leb 2 2 = True" *)
+lemma test_leb1: "leb (Suc 1) (Suc 1) = True" by simp
+
+(* n < m \<longrightarrow> !(n \<ge> m) *)
+definition blt_nat :: "nat \<Rightarrow> nat \<Rightarrow> bool" where
+  "blt_nat n m = negb (leb m n)"
+
+lemma test_blt_nat1: "blt_nat (Suc 1) (Suc 1) = False"
+  unfolding blt_nat_def
+  apply (simp)
+  done
+
+lemma test_blt_nat2: "blt_nat (Suc 1) (Suc (Suc (Suc 1))) = True"
+  unfolding blt_nat_def
+  apply (simp)
+  done
+
+lemma test_blt_nat3: "blt_nat (Suc (Suc (Suc 1))) (Suc 1) = False"
+  unfolding blt_nat_def
+  apply (simp)
+  done
+
 theorem plus_0_n: "\<forall> n::nat. 0 + n = n" by simp
 theorem plus_1_l: "\<forall> n::nat. 1 + n = Suc n" by simp
 theorem mult_0_l: "\<forall> n::nat. 0 * n = 0" by simp
 
 theorem plus_id_example: "\<forall> n m::nat. n = m \<longrightarrow> n + n = m + m" by simp
+theorem plus_id_exercise: "\<forall> n m p::nat. n = m \<longrightarrow> m = p \<longrightarrow> n + m = m + p"
+  apply (simp)
+  done
+
 theorem mult_0_plus: "\<forall> n m::nat. (0 + n) * m = n * m" by simp
+theorem mult_S_1: "\<forall> n m::nat. m = Suc n \<longrightarrow> m * (1 + n) = m * m"
+  apply (simp)
+  done
 
 end
