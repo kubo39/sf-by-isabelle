@@ -171,4 +171,22 @@ theorem mult_S_1: "\<forall> n m::nat. m = Suc n \<longrightarrow> m * (1 + n) =
   apply (simp)
   done
 
+theorem plus_1_neq_0: "\<forall> n::nat. beq_nat (n + 1) 0 = False"
+  apply (simp)
+  done
+
+(* theorem negb_involutive: "\<forall> b::bool. negb (negb b) = b" *)
+theorem negb_involutive: "negb (negb b) = b"
+  apply (induction b)
+   apply (simp_all)
+  done
+
+theorem andb_commutative: "andb b c = andb c b"
+  apply (induction b)
+   apply (induction c)
+    apply (simp_all)
+  apply (induction c)
+   apply (simp_all)
+  done
+
 end
