@@ -27,11 +27,13 @@ fun negb :: "bool \<Rightarrow> bool" where
   "negb True = False"
 | "negb False = True"
 
-fun andb :: "bool \<Rightarrow> bool \<Rightarrow> bool" where
+fun andb :: "bool \<Rightarrow> bool \<Rightarrow> bool" (infixr "&&" 65)
+  where
   "andb True b2 = b2"
 | "andb False _ = False"
 
-fun orb :: "bool \<Rightarrow> bool \<Rightarrow> bool" where
+fun orb :: "bool \<Rightarrow> bool \<Rightarrow> bool" (infixr "||" 65)
+  where
   "orb True _ = True"
 | "orb False b2 = b2"
 
@@ -40,6 +42,9 @@ lemma test_orb2: "orb False False = False" by simp
 lemma test_orb3: "orb False True = True" by simp
 lemma test_orb4: "orb True True = True" by simp
 
+lemma test_orb5: "False || False || True = True"
+  apply (simp)
+  done
 
 fun pred :: "nat \<Rightarrow> nat" where
   "pred 0 = 0"
@@ -98,4 +103,3 @@ theorem plus_id_example: "\<forall> n m::nat. n = m \<longrightarrow> n + n = m 
 theorem mult_0_plus: "\<forall> n m::nat. (0 + n) * m = n * m" by simp
 
 end
-
