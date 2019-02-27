@@ -59,4 +59,12 @@ lemma zero_or_succ: "n = 0 \<or> n = Suc (pred n)"
    apply (simp_all)
   done
 
+lemma mult_eq_0: "\<forall> n m::nat. n * m = 0 \<longrightarrow> n = 0 \<or> m = 0"
+  apply (simp)
+  done
+
+theorem or_commut: "P \<or> Q \<longrightarrow> Q \<or> P"
+  apply (simp)
+  done
+
 end
