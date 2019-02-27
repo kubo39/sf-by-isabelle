@@ -22,8 +22,11 @@ value "fst' (3, 5)"
 fun snd' :: "nat * nat \<Rightarrow> nat" where
   "snd' (x, y) = y"
 
-fun swap_pair :: "nat * nat \<Rightarrow> nat * nat" where
-  "swap_pair (x, y) = (y, x)"
+fun swap_pair :: "natprod \<Rightarrow> natprod" where
+  "swap_pair (pair (x, y)) = pair (y, x)"
+
+fun swap_pair' :: "nat * nat \<Rightarrow> nat * nat" where
+  "swap_pair' (x, y) = (y, x)"
 
 theorem subjective_pairing': "\<forall> n m::nat. (n, m) = (fst'(n, m), snd'(n, m))" by simp
 
@@ -31,6 +34,16 @@ theorem subjective_pairing': "\<forall> n m::nat. (n, m) = (fst'(n, m), snd'(n, 
 theorem subjective_pairing: "p = pair (fst p, snd p)"
   apply (induction p)
   apply (auto)
+  done
+
+theorem snd_fst_is_swap: "(snd' p, fst' p) = swap_pair' p"
+  apply (induction p)
+  apply (simp)
+  done
+
+theorem fst_swap_is_snd: "fst' (swap_pair' p) = snd' p"
+  apply (induction p)
+  apply (simp)
   done
 
 no_notation Nil ("[]") and Cons (infixr "#" 65) and append (infixr "@" 65)
@@ -66,6 +79,42 @@ lemma test_hd1: "hd 0 (1 # 2 # 3 # []) = 1" by simp
 lemma test_hd2: "hd 0 [] = 0" by simp
 lemma test_tl: "tl (1 # 2 # 3 # []) = 2 # 3 # []" by simp
 
+fun nonzeros :: "natlist \<Rightarrow> natlist" where
+  "nonzeros [] = []"
+| "nonzeros (x # xs) = (if x = 0 then nonzeros xs else x # (nonzeros xs))"
+
+lemma test_nonzeros: "nonzeros (0 # 1 # 0 # 2 # 3 # 0 # 0 # []) = 1 # 2 # 3 # []"
+  apply (simp)
+  done
+
+fun oddmembers :: "natlist \<Rightarrow> natlist" where
+  "oddmembers [] = []"
+| "oddmembers (x # xs) = (if odd x then x # oddmembers xs else oddmembers xs)"
+
+lemma test_oddmembers: "oddmembers (0 # 1 # 0 # 2 # 3 # 0 # 0 # []) = 1 # 3 # []"
+  apply (simp)
+  done
+
+definition countoddmembers :: "natlist \<Rightarrow> nat" where
+  "countoddmembers xs = length (oddmembers xs)"
+
+lemma test_countoddmembers1: "countoddmembers (1 # 0 # 3 # 1 # 4 # 5 # []) = 4"
+  unfolding countoddmembers_def
+  apply (simp)
+  done
+
+lemma test_countoddmembers2: "countoddmembers (0 # 2 # 4 # []) = 0"
+  unfolding countoddmembers_def
+  apply (simp)
+  done
+
+lemma test_countoddmembers3: "countoddmembers [] = 0"
+  unfolding countoddmembers_def
+  apply (simp)
+  done
+
+subsection {* inferences *}
+
 theorem nil_app: "\<forall> xs::natlist. [] @ xs = xs" by simp
 
 (* theorem tl_length_pred: "\<forall> xs::natlist. pred (length xs) = length (tl xs)" *)
@@ -99,5 +148,17 @@ theorem rev_length: "length (rev xs) = length xs"
    apply (simp)
   apply (simp add: app_length)
   done
+
+(* theorem app_nil_r: "\<forall> xs::natlist. xs @ [] = xs" *)
+theorem app_nil_r: "xs @ [] = xs"
+  apply (induction xs)
+   apply (simp_all)
+  done
+
+(*
+theorem rev_app_distr: "rev (xs @ ys) = (rev xs) @ (rev ys)"
+  apply (induction xs)
+   apply (simp)
+*)
 
 end
