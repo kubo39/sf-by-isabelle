@@ -34,6 +34,34 @@ lemma test_rev1: "rev (1 # 2 # []) = 2 #1 # []" by simp
 lemma test_rev2: "rev (True # []) = True # []" by simp
 lemma test_length1: "length (1 # 2 # 3 # []) = 3" by simp
 
+theorem app_nil_r: "xs @ [] = xs"
+  apply (induction xs)
+   apply (auto)
+  done
+
+theorem app_assoc: "xs @ m @ n = (xs @ m) @ n"
+  apply (induction xs)
+   apply (auto)
+  done
+
+theorem app_length: "length (xs @ ys) = length xs + length ys"
+  apply (induction xs)
+   apply (auto)
+  done
+
+theorem rev_app_distr: "rev (xs @ ys) = rev ys @ rev xs"
+  apply (induction xs)
+   apply (simp add: app_nil_r)
+  apply (simp add: app_assoc)
+  done
+
+theorem rev_involutive: "rev (rev xs) = xs"
+  apply (induction xs)
+   apply (auto)
+  apply (simp add: rev_app_distr)
+  done
+
+
 fun fst :: "'X * 'Y \<Rightarrow> 'X" where "fst (x, y) = x"
 lemma test_fst1: "fst (3, 4) = 3" by simp
 
@@ -46,6 +74,12 @@ fun combine :: "'a list \<Rightarrow> 'b list \<Rightarrow> ('a * 'b) list" wher
 | "combine (x # xs) (y # ys) = (x, y) # (combine xs ys)"
 
 value "combine ((1::nat) # 2 # []) ((True::bool) # False # [])"
+
+(*
+fun split :: "('a * 'b) list \<Rightarrow> ('a list) * ('b list)" where
+  "split [] = ([]::('a list), []::('b list))"
+| "split x # xs = (fst x # fst (split xs), snd x # snd (split xs))"
+*)
 
 
 fun do3times :: "('X \<Rightarrow> 'X) \<Rightarrow> 'X \<Rightarrow> 'X" where
