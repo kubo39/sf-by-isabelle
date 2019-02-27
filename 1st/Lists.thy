@@ -155,10 +155,16 @@ theorem app_nil_r: "xs @ [] = xs"
    apply (simp_all)
   done
 
-(*
-theorem rev_app_distr: "rev (xs @ ys) = (rev xs) @ (rev ys)"
+theorem rev_app_distr: "rev (xs @ ys) = rev ys @ rev xs"
   apply (induction xs)
-   apply (simp)
-*)
+   apply (simp add: app_nil_r)
+  apply (simp add: app_assoc)
+  done
+
+theorem rev_involutive: "rev (rev xs) = xs"
+  apply (induction xs)
+   apply (auto)
+  apply (simp add: rev_app_distr)
+  done
 
 end
