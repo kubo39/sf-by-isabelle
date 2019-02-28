@@ -189,4 +189,17 @@ theorem andb_commutative: "andb b c = andb c b"
    apply (simp_all)
   done
 
+theorem plus_1_neq_0': "\<forall> n::nat. beq_nat (n + 1) 0 = False"
+  apply (simp)
+  done
+
+theorem andb_true_elim2: "\<forall> b c::bool. andb b c = True \<longrightarrow> c = True"
+  using andb.elims
+  apply (auto)
+  done
+
+theorem zero_nbeq_plus_1: "\<forall> n::nat. beq_nat 0 (n + 1) = False"
+  apply (simp)
+  done
+
 end
