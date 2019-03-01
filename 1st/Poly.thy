@@ -75,12 +75,28 @@ fun combine :: "'a list \<Rightarrow> 'b list \<Rightarrow> ('a * 'b) list" wher
 
 value "combine ((1::nat) # 2 # []) ((True::bool) # False # [])"
 
-(*
 fun split :: "('a * 'b) list \<Rightarrow> ('a list) * ('b list)" where
-  "split [] = ([]::('a list), []::('b list))"
-| "split x # xs = (fst x # fst (split xs), snd x # snd (split xs))"
-*)
+  "split [] = ([], [])"
+| "split (x # xs) = (fst x # fst (split xs), snd x # snd (split xs))"
 
+lemma test_split: "split ((1, False) # (2, False) # []) = (1 # 2 # [], False # False # [])"
+  apply (simp)
+  done
+
+datatype 'a option = None | Some 'a
+
+(* To avoid mismatch HOL.bool and Basics.bool, ugly way... *)
+fun nth_error :: "'a list \<Rightarrow> nat \<Rightarrow> 'a option" where
+  "nth_error [] _ = None"
+| "nth_error (x # xs) n = (if (beq_nat n 0) = True then Some x else nth_error xs (pred n))"
+
+lemma test_nth_error2: "nth_error ((1 # []) # ((Suc 1) # []) # []) 1 = Some ((Suc 1) # [])"
+  apply (simp)
+  done
+
+lemma test_nth_error3: "nth_error (True # []) (Suc 1) = None"
+  apply (simp)
+  done
 
 fun do3times :: "('X \<Rightarrow> 'X) \<Rightarrow> 'X \<Rightarrow> 'X" where
   "do3times f n = f (f (f n))"
@@ -93,13 +109,14 @@ fun filter :: "('a \<Rightarrow> bool) \<Rightarrow> 'a list \<Rightarrow> 'a li
   "filter _ [] = []"
 | "filter f (x # xs) = (case f x of True \<Rightarrow> x # (filter f xs) | False \<Rightarrow> filter f xs)"
 
-value "filter evenb (1 # 2 # 3 # 4 # [])"
-(* lemma test_filter1: "filter evenb (1 # 2 # 3 # 4 # []) = (2 # 4 # [])" *)
+lemma test_filter1: "filter evenb (1 # (Suc 1) # (Suc (Suc 1)) # (Suc (Suc (Suc 1))) # []) = 2 # 4 # []"
+  apply (simp)
+  done
 
 fun countoddmembers' :: "nat list \<Rightarrow> nat" where
   "countoddmembers' xs = length (filter oddb xs)"
 
-(* lemma test_countoddmembers: "countoddmembers' (1 # 0 # 3 # 1 # 4 # 5 # []) = 4" *)
+(* lemma test_countoddmembers: "countoddmembers' (1 # 0 # (Suc (Suc 1)) # 1 # 4 # 5 # []) = 4" *)
 
 fun map :: "('a \<Rightarrow> 'b) \<Rightarrow> 'a list \<Rightarrow> 'b list" where
   "map _ [] = []"
@@ -107,7 +124,15 @@ fun map :: "('a \<Rightarrow> 'b) \<Rightarrow> 'a list \<Rightarrow> 'b list" w
 
 value "map (plus 3) (1 # 2 # [])"
 
-(* lemma test_map2: "map oddb (2 # 1 # 2 # 5 # []) = (False # True # False # True # [])" *)
+lemma test_map2: "map oddb (Suc 1 # 1 # Suc 1 # (Suc (Suc (Suc (Suc 1)))) # []) = (False # True # False # True # [])"
+  apply (simp)
+  done
+
+(*
+theorem map_rev: "map f (rev xs) = rev (map f xs)"
+  apply (induction xs)
+   apply (auto)
+*)
 
 fun fold :: "('a \<Rightarrow> 'b \<Rightarrow> 'b) \<Rightarrow> 'a list \<Rightarrow> 'b \<Rightarrow> 'b" where
   "fold _ [] b = b"
