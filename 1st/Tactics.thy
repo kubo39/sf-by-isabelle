@@ -9,6 +9,17 @@ theorem silly1: "n = m \<longrightarrow> [n, p] = [n, q] \<longrightarrow> [n, p
   apply (simp)
   done
 
+theorem silly_ex: "evenb n = True \<longrightarrow> oddb (Suc n) = True \<longrightarrow> evenb (Suc (Suc 1)) = True \<longrightarrow> oddb 4 = True"
+  apply (simp)
+  done
+
+(*
+theorem rev_exercise1: "xs = rev ys \<longrightarrow> ys = rev xs"
+  apply (induction ys)
+   apply (simp add: rev_involutive)
+  apply (induction xs)
+*)
+
 subsection {* The apply ... with ... Tactic *}
 
 lemma trans_eq_example: "[a, b] = [c, d] \<longrightarrow> [c, d] = [e, f] \<longrightarrow> [a, b] = [e, f]"
@@ -19,17 +30,49 @@ lemma trans_eq: "n = m \<longrightarrow> m = p \<longrightarrow> n = p"
   apply (simp)
   done
 
+lemma trans_eq_exercise: "m = minustwo p \<longrightarrow> n + q = m \<longrightarrow> n + q = minustwo p"
+  apply (simp)
+  done
+
 subsection {* The inversion tactic *}
 
 theorem S_inversion: "\<forall> n m::nat. Suc n = Suc m \<longrightarrow> n = m"
   apply (simp)
   done
 
+theorem inversion_ex1: "\<forall> n m p::nat. (n # m # []) = (p # p # []) \<longrightarrow> (n # []) = (m # [])"
+  apply (simp)
+  done
+
+theorem inversion_ex2: "\<forall> n m::nat. (n # []) = (m # []) \<longrightarrow> n = m"
+  apply (simp)
+  done
+
+theorem inversion_ex3: "x # y # l = z # j \<longrightarrow> y # l = x # j \<longrightarrow> x = y"
+  apply (auto)
+  done
+
+theorem inversion_ex6: "x # y # l = [] \<longrightarrow> y # l = z # j \<longrightarrow> x = z"
+  apply (simp)
+  done
+
+theorem f_equal: "x = y \<longrightarrow> f x = f y"
+  apply (simp)
+  done
+
 subsection {* Using tactic on Hypotheses *}
 
-(* theorem S_inj: "\<forall> n m::nat. beq_nat (Suc n) (Suc m) = b \<longrightarrow> beq_nat n m = b" *)
+theorem S_inj: "\<forall> n m::nat. beq_nat (Suc n) (Suc m) = b \<longrightarrow> beq_nat n m = b"
+  apply (simp)
+  done
+
+theorem plus_n_n_injective: "\<forall> n m::nat. n + n = m + m \<longrightarrow> n = m"
+  apply (simp)
+  done
 
 subsection {* Varying the induction Hypotheses *}
+
+(* theorem beq_nat_true: "beq_nat n m = True \<longrightarrow> n = m" *)
 
 subsection {* Unfolding Definition *}
 
