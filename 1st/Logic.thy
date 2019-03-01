@@ -67,4 +67,14 @@ theorem or_commut: "P \<or> Q \<longrightarrow> Q \<or> P"
   apply (simp)
   done
 
+subsubsection {* Falsehood and Negation *}
+
+(* theorem ex_falso_quodlibet: "False \<rightarrow> P" *)
+
+(* theorem zero_not_one: "\<not> (0 = 1)" *)
+
+theorem not_False: "\<not> HOL.False"
+  apply (simp)
+  done
+
 end
