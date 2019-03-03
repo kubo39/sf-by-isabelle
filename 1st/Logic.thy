@@ -97,4 +97,11 @@ theorem not_both_true_and_false: "\<not>(P \<and> \<not>P)"
 
 (* theorem not_true_is_false: "\<forall> b::bool. b  True \<longrightarrow> b = True" *)
 
+subsubsection {* Truth *}
+
+(* True is true. *)
+theorem True_is_true: "HOL.True"
+  apply (simp)
+  done
+
 end
