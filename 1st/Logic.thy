@@ -79,4 +79,22 @@ theorem not_False: "\<not> HOL.False"
   apply (simp)
   done
 
+theorem contradiction_implies_anything: "(P \<and> \<not>P) \<longrightarrow> Q"
+  apply (simp)
+  done
+
+theorem double_neg: "P \<longrightarrow> \<not>\<not>P"
+  apply (simp)
+  done
+
+theorem contrapositive: "(P \<longrightarrow> Q) \<longrightarrow> (\<not>Q \<longrightarrow> \<not>P)"
+  apply (auto)
+  done
+
+theorem not_both_true_and_false: "\<not>(P \<and> \<not>P)"
+  apply (simp)
+  done
+
+(* theorem not_true_is_false: "\<forall> b::bool. b  True \<longrightarrow> b = True" *)
+
 end
