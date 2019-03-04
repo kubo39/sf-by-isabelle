@@ -175,4 +175,19 @@ lemma test_plus3: "plus3 4 = 7"
   apply (simp add: plus3_def)
 *)
 
+definition fold_length :: "'a list \<Rightarrow> nat" where
+  "fold_length xs = fold (\<lambda> _ n. Suc n) xs 0"
+
+lemma test_fold_length: "fold_length (4 # 7 # 0 # []) = 3"
+  unfolding fold_length_def
+  apply (simp)
+  done
+
+theorem fold_length_correct: "fold_length xs = length xs"
+  unfolding fold_length_def
+  apply (induction xs)
+   apply (simp)
+  apply (simp)
+  done
+
 end
