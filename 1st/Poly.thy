@@ -85,10 +85,9 @@ lemma test_split: "split ((1, False) # (2, False) # []) = (1 # 2 # [], False # F
 
 datatype 'a option = None | Some 'a
 
-(* To avoid mismatch HOL.bool and Basics.bool, ugly way... *)
 fun nth_error :: "'a list \<Rightarrow> nat \<Rightarrow> 'a option" where
   "nth_error [] _ = None"
-| "nth_error (x # xs) n = (if (beq_nat n 0) = True then Some x else nth_error xs (pred n))"
+| "nth_error (x # xs) n = (if n = 0 then Some x else nth_error xs (pred n))"
 
 lemma test_nth_error2: "nth_error ((1 # []) # ((Suc 1) # []) # []) 1 = Some ((Suc 1) # [])"
   apply (simp)
