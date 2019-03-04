@@ -157,7 +157,9 @@ fun fold :: "('a \<Rightarrow> 'b \<Rightarrow> 'b) \<Rightarrow> 'a list \<Righ
 
 value "fold plus (1 # 2 # 3 # 4 # []) 0"
 
-(* lemma fold_example1: "fold mult (1 # 2 # 3 # 4 # []) 1 = 24" *)
+lemma fold_example1: "fold mult (1 # (Suc 1) # (Suc (Suc 1)) # (Suc (Suc (Suc 1))) # []) 1 = 24"
+  apply (simp)
+  done
 
 lemma fold_example2: "fold andb (True # True # False # True # []) True = False"
   apply (simp)
