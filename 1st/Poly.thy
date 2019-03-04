@@ -136,6 +136,15 @@ lemma test_anon_fun': "doit3times (\<lambda> n. n * n) (2::nat) = 256"
   apply (simp)
   done
 
+definition filter_even_gt7 :: "nat list \<Rightarrow> nat list" where
+  "filter_even_gt7 xs = filter (\<lambda> n. if n > 7 then evenb n else False) xs"
+
+value "filter_even_gt7 (1 # 2 # 6 # 9 # 10 # 3 # 12 # 8 # []) = (10 # 12 # 8 # [])"
+(*
+lemma test_filter_even_gt7_1: "filter_even_gt7 (1 # 2 # 6 # 9 # 10 # 3 # 12 # 8 # []) = (10 # 12 # 8 # [])"
+  apply (simp)
+*)
+
 fun map :: "('a \<Rightarrow> 'b) \<Rightarrow> 'a list \<Rightarrow> 'b list" where
   "map _ [] = []"
 | "map f (x # xs) = (f x) # (map f xs)"
