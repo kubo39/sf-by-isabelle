@@ -115,6 +115,9 @@ fun doit3times :: "('X \<Rightarrow> 'X) \<Rightarrow> 'X \<Rightarrow> 'X" wher
 value "doit3times minustwo 9" (* "3" :: "nat" *)
 (* lemma test_doit3times: "doit3times minustwo 9 = 3" *)
 
+lemma test_doit3times': "doit3times negb True = False"
+  apply (simp)
+  done
 
 fun filter :: "('a \<Rightarrow> bool) \<Rightarrow> 'a list \<Rightarrow> 'a list" where
   "filter _ [] = []"
