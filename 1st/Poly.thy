@@ -129,7 +129,7 @@ fun countoddmembers' :: "nat list \<Rightarrow> nat" where
 
 (* lemma test_countoddmembers: "countoddmembers' (1 # 0 # (Suc (Suc 1)) # 1 # 4 # 5 # []) = 4" *)
 
-lemma test_anon_fun': "doit3times (\<lambda> n::nat. n * n) 2 = 256"
+lemma test_anon_fun': "doit3times (\<lambda> n. n * n) (2::nat) = 256"
   apply (simp)
   done
 
@@ -164,7 +164,7 @@ lemma fold_example2: "fold andb (True # True # False # True # []) True = False"
   done
 
 definition constfun :: "'a \<Rightarrow> nat \<Rightarrow> 'a" where
-  "constfun x = (\<lambda> n::nat. x)"
+  "constfun x = (\<lambda> n. x)"
 
 definition ftrue where "ftrue = constfun True"
 
