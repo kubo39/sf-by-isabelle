@@ -151,4 +151,28 @@ lemma fold_example2: "fold andb (True # True # False # True # []) True = False"
   apply (simp)
   done
 
+definition constfun :: "'a \<Rightarrow> nat \<Rightarrow> 'a" where
+  "constfun x = (\<lambda> n::nat. x)"
+
+definition ftrue where "ftrue = constfun True"
+
+lemma constfun_example1: "ftrue 0 = True"
+  unfolding ftrue_def
+  unfolding constfun_def
+  apply (simp)
+  done
+
+lemma constfun_example2: "(constfun 5) 99 = 5"
+  unfolding constfun_def
+  apply (simp)
+  done
+
+definition plus3 :: "nat \<Rightarrow> nat" where
+  "plus3 = plus 3"
+
+(*
+lemma test_plus3: "plus3 4 = 7"
+  apply (simp add: plus3_def)
+*)
+
 end
