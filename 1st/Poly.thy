@@ -97,6 +97,18 @@ lemma test_nth_error3: "nth_error (True # []) (Suc 1) = None"
   apply (simp)
   done
 
+fun hd_error :: "'a list \<Rightarrow> 'a option" where
+  "hd_error [] = None"
+| "hd_error (x # xs) = Some x"
+
+lemma test_hd_error1: "hd_error (1 # 2 # []) = Some 1"
+  apply (simp)
+  done
+
+lemma test_hd_error2: "hd_error ((1 # []) # (2 # []) # []) = Some (1 # [])"
+  apply (simp)
+  done
+
 fun doit3times :: "('X \<Rightarrow> 'X) \<Rightarrow> 'X \<Rightarrow> 'X" where
   "doit3times f n = f (f (f n))"
 
