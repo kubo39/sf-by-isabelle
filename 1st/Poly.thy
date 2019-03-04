@@ -97,11 +97,11 @@ lemma test_nth_error3: "nth_error (True # []) (Suc 1) = None"
   apply (simp)
   done
 
-fun do3times :: "('X \<Rightarrow> 'X) \<Rightarrow> 'X \<Rightarrow> 'X" where
-  "do3times f n = f (f (f n))"
+fun doit3times :: "('X \<Rightarrow> 'X) \<Rightarrow> 'X \<Rightarrow> 'X" where
+  "doit3times f n = f (f (f n))"
 
-value "do3times minustwo 9" (* "3" :: "nat" *)
-(* lemma test_do3times: "do3times minustwo 9 = 3" *)
+value "doit3times minustwo 9" (* "3" :: "nat" *)
+(* lemma test_doit3times: "doit3times minustwo 9 = 3" *)
 
 
 fun filter :: "('a \<Rightarrow> bool) \<Rightarrow> 'a list \<Rightarrow> 'a list" where
@@ -117,11 +117,17 @@ fun countoddmembers' :: "nat list \<Rightarrow> nat" where
 
 (* lemma test_countoddmembers: "countoddmembers' (1 # 0 # (Suc (Suc 1)) # 1 # 4 # 5 # []) = 4" *)
 
+lemma test_anon_fun': "doit3times (\<lambda> n::nat. n * n) 2 = 256"
+  apply (simp)
+  done
+
 fun map :: "('a \<Rightarrow> 'b) \<Rightarrow> 'a list \<Rightarrow> 'b list" where
   "map _ [] = []"
 | "map f (x # xs) = (f x) # (map f xs)"
 
 value "map (plus 3) (1 # 2 # [])"
+
+(* lemma test_map1: "map (\<lambda> x. plus 3 x) ((Suc 1) # 0 # (Suc 1) # []) = (5 # 3 # 5 # [])" *)
 
 lemma test_map2: "map oddb (Suc 1 # 1 # Suc 1 # (Suc (Suc (Suc (Suc 1)))) # []) = (False # True # False # True # [])"
   apply (simp)
@@ -138,5 +144,11 @@ fun fold :: "('a \<Rightarrow> 'b \<Rightarrow> 'b) \<Rightarrow> 'a list \<Righ
 | "fold f (x # xs) b = f x (fold f xs b)"
 
 value "fold plus (1 # 2 # 3 # 4 # []) 0"
+
+(* lemma fold_example1: "fold mult (1 # 2 # 3 # 4 # []) 1 = 24" *)
+
+lemma fold_example2: "fold andb (True # True # False # True # []) True = False"
+  apply (simp)
+  done
 
 end
