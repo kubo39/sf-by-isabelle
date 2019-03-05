@@ -229,4 +229,23 @@ theorem fold_length_correct: "fold_length xs = length xs"
   apply (simp)
   done
 
+
+definition prod_curry :: "('a * 'b \<Rightarrow> 'c) \<Rightarrow> 'a \<Rightarrow> 'b \<Rightarrow> 'c" where
+  "prod_curry f x y = f (x, y)"
+
+definition prod_uncurry :: "('a \<Rightarrow> 'b \<Rightarrow> 'c) \<Rightarrow> ('a * 'b) \<Rightarrow> 'c" where
+  "prod_uncurry f p = (f (fst p)) (snd p)"
+
+theorem uncurry_curry: "prod_curry (prod_uncurry f) x y = f x y"
+  unfolding prod_curry_def
+  unfolding prod_uncurry_def
+  apply (simp)
+  done
+
+theorem curry_uncurry: "ALL p::('a * 'b). prod_uncurry (prod_curry f) p = f p"
+  unfolding prod_uncurry_def
+  unfolding prod_curry_def
+  apply (simp)
+  done
+
 end
