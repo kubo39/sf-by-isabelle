@@ -8,8 +8,6 @@ section {* Logic *}
 
 subsection {* Logical Connectives *}
 
-value "(mult 2 2)"
-
 subsubsection {* Conjunction *}
 
 lemma and_example: "3 + 4 = 7 \<and> (2::nat) * 2 = 4"
@@ -41,6 +39,10 @@ lemma proj2: "P \<and> Q \<longrightarrow> Q"
   done
 
 theorem and_commut: "P \<and> Q \<longrightarrow> Q \<and> P"
+  apply (simp)
+  done
+
+theorem and_assoc: "P \<and> (Q \<and> R) \<longrightarrow> (P \<and> Q) \<and> R"
   apply (simp)
   done
 
@@ -103,5 +105,13 @@ subsubsection {* Truth *}
 theorem True_is_true: "HOL.True"
   apply (simp)
   done
+
+subsubsection {* Logical Equivalance*}
+
+(* definition iff :: "HOL.bool \<Rightarrow> HOL.bool \<Rightarrow> HOL.bool" where "iff P Q = (P \<rightarrow> Q) \<and> (Q \<longrightarrow> P)" *)
+
+subsubsection {* Existential Quantification*}
+
+(* lemma four_is_even: "\<exists> n. 4 = n + n" *)
 
 end
