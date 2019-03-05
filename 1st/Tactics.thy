@@ -72,7 +72,15 @@ theorem plus_n_n_injective: "\<forall> n m::nat. n + n = m + m \<longrightarrow>
 
 subsection {* Varying the induction Hypotheses *}
 
-(* theorem beq_nat_true: "beq_nat n m = True \<longrightarrow> n = m" *)
+(*
+theorem beq_nat_true: "beq_nat n m = True \<longrightarrow> n = m"
+  apply (induction n)
+   apply (induction m)
+    apply (simp)
+   apply (simp)
+  apply (induction m)
+   apply (simp)
+*)
 
 subsection {* Unfolding Definition *}
 
@@ -101,5 +109,21 @@ theorem silly_fact_2: "bar m + 1 = bar (m + 1) + 1"
   done
 
 subsection {* Using destruct on Compound Expressions *}
+
+definition sillyfun :: "nat \<Rightarrow> bool" where
+  "sillyfun n = (if n = 3 then False else (if n = 5 then False else False))"
+
+theorem sillyfun_false: "sillyfun n = False"
+  unfolding sillyfun_def
+  apply (simp)
+  done
+
+(*
+theorem combine_split: "split xs = (ys, zs) \<longrightarrow> combine ys zs = xs"
+  apply (induction xs)
+   apply (simp)
+  apply (induction ys)
+   apply (simp)
+*)
 
 end
