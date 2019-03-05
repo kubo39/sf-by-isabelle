@@ -163,6 +163,14 @@ theorem map_rev: "map f (rev xs) = rev (map f xs)"
    apply (auto)
 *)
 
+fun flat_map :: "('a \<Rightarrow> 'b list) \<Rightarrow> 'a list \<Rightarrow> 'b list" where
+  "flat_map _ [] = []"
+| "flat_map f (x # xs) = (f x) @ (flat_map f xs)"
+
+lemma test_flat_map1: "flat_map (\<lambda> n. n # (n + 1) # (n + 2) # []) (1 # []) = (1 # 2 # 3 # [])"
+  apply (simp)
+  done
+
 fun fold :: "('a \<Rightarrow> 'b \<Rightarrow> 'b) \<Rightarrow> 'a list \<Rightarrow> 'b \<Rightarrow> 'b" where
   "fold _ [] b = b"
 | "fold f (x # xs) b = f x (fold f xs b)"
