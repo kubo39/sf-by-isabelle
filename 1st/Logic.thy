@@ -110,9 +110,17 @@ theorem True_is_true: "HOL.True"
   apply (simp)
   done
 
-subsubsection {* Logical Equivalance*}
+subsubsection {* Logical Equivalance *}
 
-(* definition iff :: "HOL.bool \<Rightarrow> HOL.bool \<Rightarrow> HOL.bool" where "iff P Q = (P \<rightarrow> Q) \<and> (Q \<longrightarrow> P)" *)
+definition iff :: "HOL.bool \<Rightarrow> HOL.bool \<Rightarrow> HOL.bool" where
+   "iff P Q \<equiv> (P \<longrightarrow> Q) \<and> (Q \<longrightarrow> P)"
+
+theorem iff_sym: "\<forall> P Q. iff P Q \<longrightarrow> iff Q P"
+  unfolding iff_def
+  apply (simp)
+  done
+
+(* lemma not_true_iff_false: "\<forall> b::Basics.bool." *)
 
 subsubsection {* Existential Quantification*}
 
