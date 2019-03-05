@@ -171,6 +171,11 @@ lemma test_flat_map1: "flat_map (\<lambda> n. n # (n + 1) # (n + 2) # []) (1 # [
   apply (simp)
   done
 
+fun option_map :: "('a \<Rightarrow> 'b) \<Rightarrow> 'a option \<Rightarrow> 'b option" where
+  "option_map _ None = None"
+| "option_map f (Some x) = Some (f x)"
+
+
 fun fold :: "('a \<Rightarrow> 'b \<Rightarrow> 'b) \<Rightarrow> 'a list \<Rightarrow> 'b \<Rightarrow> 'b" where
   "fold _ [] b = b"
 | "fold f (x # xs) b = f x (fold f xs b)"
