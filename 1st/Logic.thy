@@ -75,6 +75,10 @@ theorem ex_falso_quodlibet: "HOL.False \<longrightarrow> P"
   apply (simp)
   done
 
+theorem not_implies_our_not: "\<forall> P. \<not>P \<longrightarrow> (\<forall> Q. P \<longrightarrow> Q)"
+  apply (simp)
+  done
+
 (* theorem zero_not_one: "\<not> (0 = 1)" *)
 
 theorem not_False: "\<not> HOL.False"
