@@ -122,7 +122,20 @@ theorem iff_sym: "\<forall> P Q. iff P Q \<longrightarrow> iff Q P"
   apply (simp)
   done
 
-(* lemma not_true_iff_false: "\<forall> b::Basics.bool." *)
+(* lemma not_true_iff_false: "\<forall> b::Basics.bool. b \<noteq> bool.True \<longleftrightarrow> b = bool.False" *)
+
+theorem iff_refl: "\<forall> P. P \<longleftrightarrow> P"
+  apply (simp)
+  done
+
+theorem iff_trans: "\<forall> P Q R. (P \<longleftrightarrow> Q) \<longrightarrow> (Q \<longleftrightarrow> R) \<longrightarrow> (P \<longleftrightarrow> R)"
+  apply (simp)
+  done
+
+theorem or_distributes_over_and: "\<forall> P Q R. P \<or> (Q \<and> R) \<longleftrightarrow> (P \<or> Q) \<and> (P \<or> R)"
+  using [[simp_trace]]
+  apply (auto)
+  done
 
 subsubsection {* Existential Quantification*}
 
