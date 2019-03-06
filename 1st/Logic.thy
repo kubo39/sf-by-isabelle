@@ -81,6 +81,8 @@ theorem not_implies_our_not: "\<forall> P. \<not>P \<longrightarrow> (\<forall> 
 
 (* theorem zero_not_one: "\<not> (0 = 1)" *)
 
+(* theorem zero_not_one': "0 \<noteq> 1" *)
+
 theorem not_False: "\<not> HOL.False"
   apply (simp)
   done
@@ -101,7 +103,7 @@ theorem not_both_true_and_false: "\<not>(P \<and> \<not>P)"
   apply (simp)
   done
 
-(* theorem not_true_is_false: "\<forall> b::bool. b  True \<longrightarrow> b = True" *)
+(* theorem not_true_is_false: "\<forall> b::bool. b \<noteq> True \<longrightarrow> b = False" *)
 
 subsubsection {* Truth *}
 
