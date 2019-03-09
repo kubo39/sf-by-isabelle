@@ -143,6 +143,14 @@ theorem or_distributes_over_and: "\<forall> P Q R. P \<or> (Q \<and> R) \<longle
   apply (auto)
   done
 
+lemma mult_0: "\<forall> n m::nat. n * m = 0 \<longleftrightarrow> n = 0 \<or> m = 0"
+  apply (simp)
+  done
+
+lemma or_assoc: "\<forall> P Q R. P \<or> (Q \<or> R) \<longleftrightarrow> (P \<or> Q) \<or> R"
+  apply (simp)
+  done
+
 subsubsection {* Existential Quantification*}
 
 (* lemma four_is_even: "\<exists> n. 4 = n + n" *)
