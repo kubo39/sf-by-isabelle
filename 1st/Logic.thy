@@ -103,7 +103,10 @@ theorem not_both_true_and_false: "\<not>(P \<and> \<not>P)"
   apply (simp)
   done
 
-(* theorem not_true_is_false: "\<forall> b::bool. b \<noteq> True \<longrightarrow> b = False" *)
+theorem not_true_is_false: "b \<noteq> True \<longrightarrow> b = False"
+  apply (case_tac b)
+   apply (simp_all)
+  done
 
 subsubsection {* Truth *}
 
