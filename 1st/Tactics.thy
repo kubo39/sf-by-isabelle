@@ -13,12 +13,9 @@ theorem silly_ex: "evenb n = True \<longrightarrow> oddb (Suc n) = True \<longri
   apply (simp)
   done
 
-(*
 theorem rev_exercise1: "xs = rev ys \<longrightarrow> ys = rev xs"
-  apply (induction ys)
-   apply (simp add: rev_involutive)
-  apply (induction xs)
-*)
+  apply (simp add: rev_involutive)
+  done
 
 subsection {* The apply ... with ... Tactic *}
 
