@@ -125,7 +125,10 @@ theorem iff_sym: "\<forall> P Q. iff P Q \<longrightarrow> iff Q P"
   apply (simp)
   done
 
-(* lemma not_true_iff_false: "\<forall> b::Basics.bool. b \<noteq> bool.True \<longleftrightarrow> b = bool.False" *)
+lemma not_true_iff_false: "b \<noteq> bool.True \<longleftrightarrow> b = bool.False"
+  apply (case_tac b)
+   apply (simp_all)
+  done
 
 theorem iff_refl: "\<forall> P. P \<longleftrightarrow> P"
   apply (simp)
