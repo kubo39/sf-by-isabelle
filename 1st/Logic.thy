@@ -155,4 +155,16 @@ subsubsection {* Existential Quantification*}
 
 (* lemma four_is_even: "\<exists> n. 4 = n + n" *)
 
+subsubsection {* Programming with Propisition *}
+
+fun In :: "'a \<Rightarrow> 'a list \<Rightarrow> HOL.bool" where
+  "In _ [] = HOL.False"
+| "In a (x # xs) = (x = a \<or> In a xs)"
+
+lemma In_example_1: "In 4 (1 # 2 # 3 # 4 # 5 # [])"
+  apply (simp)
+  done
+
+(* lemma In_example_2: "\<forall> n. In n (2 # 4 # []) \<longrightarrow> (\<exists> n'. n = 2 * n')" *)
+
 end
