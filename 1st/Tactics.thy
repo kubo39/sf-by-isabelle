@@ -69,15 +69,8 @@ theorem plus_n_n_injective: "\<forall> n m::nat. n + n = m + m \<longrightarrow>
 
 subsection {* Varying the induction Hypotheses *}
 
-(*
 theorem beq_nat_true: "beq_nat n m = True \<longrightarrow> n = m"
-  apply (induction n)
-   apply (induction m)
-    apply (simp)
-   apply (simp)
-  apply (induction m)
-   apply (simp)
-*)
+  sorry
 
 subsection {* Unfolding Definition *}
 
@@ -115,12 +108,7 @@ theorem sillyfun_false: "sillyfun n = False"
   apply (simp)
   done
 
-(*
 theorem combine_split: "split xs = (ys, zs) \<longrightarrow> combine ys zs = xs"
-  apply (induction xs)
-   apply (simp)
-  apply (induction ys)
-   apply (simp)
-*)
+  sorry
 
 end

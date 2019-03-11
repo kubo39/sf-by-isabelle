@@ -153,7 +153,8 @@ lemma or_assoc: "\<forall> P Q R. P \<or> (Q \<or> R) \<longleftrightarrow> (P \
 
 subsubsection {* Existential Quantification*}
 
-(* lemma four_is_even: "\<exists> n. 4 = n + n" *)
+lemma four_is_even: "\<exists> n::nat. 4 = n + n"
+  sorry
 
 subsubsection {* Programming with Propisition *}
 
@@ -165,6 +166,7 @@ lemma In_example_1: "In 4 (1 # 2 # 3 # 4 # 5 # [])"
   apply (simp)
   done
 
-(* lemma In_example_2: "\<forall> n. In n (2 # 4 # []) \<longrightarrow> (\<exists> n'. n = 2 * n')" *)
+lemma In_example_2: "\<forall> n. In n (2 # 4 # []) \<longrightarrow> (\<exists> n'. n = 2 * n')"
+  sorry
 
 end
