@@ -174,4 +174,14 @@ lemma In_map: "In a xs \<longrightarrow> In (f a) (map f xs)"
    apply (simp_all)
   done
 
+lemma In_map_iff: "In y (map f xs) \<longleftrightarrow> exists x f x = y \<and> In a xs"
+  apply (induction xs)
+   apply (simp)
+  sorry
+
+lemma In_app_iff: "In a (xs @ ys) \<longrightarrow> In a xs \<or> In a ys"
+  apply (induction xs)
+   apply (simp_all)
+  done
+
 end
