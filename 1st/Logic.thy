@@ -169,4 +169,9 @@ lemma In_example_1: "In 4 (1 # 2 # 3 # 4 # 5 # [])"
 lemma In_example_2: "\<forall> n. In n (2 # 4 # []) \<longrightarrow> (\<exists> n'. n = 2 * n')"
   sorry
 
+lemma In_map: "In a xs \<longrightarrow> In (f a) (map f xs)"
+  apply (induction xs)
+   apply (simp_all)
+  done
+
 end
