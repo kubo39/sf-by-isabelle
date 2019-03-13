@@ -16,7 +16,15 @@ theorem ev_4: "ev (Suc (Suc (Suc (Suc 0))))"
   apply (rule ev_0)
   done
 
+theorem ev_double: "\<forall> n. ev (double n)"
+  oops
+
 subsection {* Using Evidence in Proofs *}
+
+theorem ev_minus2: "ev n \<Longrightarrow> ev (pred (pred n))"
+  apply (induction rule: ev.induct)
+   apply (simp_all add: ev_0)
+  done
 
 subsubsection {* Inversion on Evidence *}
 
