@@ -97,4 +97,12 @@ subsection {* Notation *}
 definition bool_to_bexpr :: "Basics.bool \<Rightarrow> bexpr" where
   "bool_to_bexpr b = (if b = True then BTrue else BFalse)"
 
+section {* Command *}
+
+datatype com = CSkip |
+               CAss string aexpr |
+               CSeq com com |
+               CIf bexpr com com |
+               CWhile bexpr com com
+
 end
