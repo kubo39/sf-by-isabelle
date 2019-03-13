@@ -57,4 +57,39 @@ theorem optimize_0plus_sound: "aeval (optimize_0plus a) = aeval a"
           apply (simp)
   oops
 
+section {* Expression with variables *}
+
+hide_type aexp
+hide_type bexp
+
+datatype aexpr = ANum nat |
+                 AId string |
+                 APlus aexpr aexpr |
+                 AMinus aexpr aexpr |
+                AMult aexpr aexpr
+
+datatype bexpr = BTrue |
+                BFalse |
+                BEq aexpr aexpr |
+                BLe aexpr aexpr |
+                BNot bexpr |
+                BAnd bexpr bexpr
+
+type_synonym state = "string \<Rightarrow> nat"
+
+fun aval :: "state \<Rightarrow> aexpr \<Rightarrow> nat" where
+  "aval _ (ANum n) = n"
+| "aval st (AId x) = st x"
+| "aval st (APlus a1 a2) = (aval st a1) + (aval st a2)"
+| "aval st (AMinus a1 a2) = (aval st a1) - (aval st a2)"
+| "aval st (AMult a1 a2) = (aval st a1) * (aval st a2)"
+
+fun bval :: "state \<Rightarrow> bexpr \<Rightarrow> bool" where
+  "bval _ BTrue = True"
+| "bval _ BFalse = False"
+| "bval st (BEq a1 a2) = beq_nat (aval st a1) (aval st a2)"
+| "bval st (BLe a1 a2) = leb (aval st a1) (aval st a2)"
+| "bval st (BNot b1) = negb (bval st b1)"
+| "bval st (BAnd b1 b2) = andb (bval st b1) (bval st b2)"
+
 end
