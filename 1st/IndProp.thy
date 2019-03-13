@@ -21,12 +21,12 @@ theorem ev_double: "\<forall> n. ev (double n)"
 
 subsection {* Using Evidence in Proofs *}
 
+subsubsection {* Inversion on Evidence *}
+
 theorem ev_minus2: "ev n \<Longrightarrow> ev (pred (pred n))"
   apply (induction rule: ev.induct)
    apply (simp_all add: ev_0)
   done
-
-subsubsection {* Inversion on Evidence *}
 
 (*
 inductive_set even :: "nat set" where
