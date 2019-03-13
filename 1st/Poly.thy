@@ -16,7 +16,7 @@ fun repeat :: "'a \<Rightarrow> nat \<Rightarrow> 'a list" where
 value "repeat (4::nat) 2" (* "4 # 4 # []" :: "nat list" *)
 lemma test_repeat2 [simp]: "repeat 1 0 = []" by auto
 lemma test_repeat1: "repeat 4 2 = 4 # 4 # []"
-  sorry
+  oops
 
 fun app :: "'a list \<Rightarrow> 'a list \<Rightarrow> 'a list" (infixr "@" 65)
   where
@@ -115,7 +115,7 @@ fun doit3times :: "('X \<Rightarrow> 'X) \<Rightarrow> 'X \<Rightarrow> 'X" wher
 
 value "doit3times minustwo 9" (* "3" :: "nat" *)
 lemma test_doit3times: "doit3times minustwo 9 = 3"
-  sorry
+  oops
 
 lemma test_doit3times': "doit3times negb True = False"
   apply (simp)
@@ -144,7 +144,7 @@ definition filter_even_gt7 :: "nat list \<Rightarrow> nat list" where
 value "filter_even_gt7 (1 # 2 # 6 # 9 # 10 # 3 # 12 # 8 # []) = (10 # 12 # 8 # [])"
 
 lemma test_filter_even_gt7_1: "filter_even_gt7 (1 # 2 # 6 # 9 # 10 # 3 # 12 # 8 # []) = (10 # 12 # 8 # [])"
-  sorry
+  oops
 
 fun map :: "('a \<Rightarrow> 'b) \<Rightarrow> 'a list \<Rightarrow> 'b list" where
   "map _ [] = []"
@@ -153,14 +153,14 @@ fun map :: "('a \<Rightarrow> 'b) \<Rightarrow> 'a list \<Rightarrow> 'b list" w
 value "map (plus 3) (1 # 2 # [])"
 
 lemma test_map1: "map (\<lambda> x. plus 3 x) ((Suc 1) # 0 # (Suc 1) # []) = (5 # 3 # 5 # [])"
-  sorry
+  oops
 
 lemma test_map2: "map oddb (Suc 1 # 1 # Suc 1 # (Suc (Suc (Suc (Suc 1)))) # []) = (False # True # False # True # [])"
   apply (simp)
   done
 
 theorem map_rev: "map f (rev xs) = rev (map f xs)"
-  sorry
+  oops
 
 fun flat_map :: "('a \<Rightarrow> 'b list) \<Rightarrow> 'a list \<Rightarrow> 'b list" where
   "flat_map _ [] = []"
@@ -210,7 +210,7 @@ definition plus3 :: "nat \<Rightarrow> nat" where
 
 lemma test_plus3: "plus3 4 = 7"
   apply (simp add: plus3_def)
-  sorry
+  oops
 
 definition fold_length :: "'a list \<Rightarrow> nat" where
   "fold_length xs = fold (\<lambda> _ n. Suc n) xs 0"

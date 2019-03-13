@@ -154,7 +154,7 @@ lemma or_assoc: "\<forall> P Q R. P \<or> (Q \<or> R) \<longleftrightarrow> (P \
 subsubsection {* Existential Quantification*}
 
 lemma four_is_even: "\<exists> n::nat. 4 = n + n"
-  sorry
+  oops
 
 subsubsection {* Programming with Propisition *}
 
@@ -167,7 +167,7 @@ lemma In_example_1: "In 4 (1 # 2 # 3 # 4 # 5 # [])"
   done
 
 lemma In_example_2: "\<forall> n. In n (2 # 4 # []) \<longrightarrow> (\<exists> n'. n = 2 * n')"
-  sorry
+  oops
 
 lemma In_map: "In a xs \<longrightarrow> In (f a) (map f xs)"
   apply (induction xs)
@@ -177,7 +177,7 @@ lemma In_map: "In a xs \<longrightarrow> In (f a) (map f xs)"
 lemma In_map_iff: "In y (map f xs) \<longleftrightarrow> exists x f x = y \<and> In a xs"
   apply (induction xs)
    apply (simp)
-  sorry
+  oops
 
 lemma In_app_iff: "In a (xs @ ys) \<longrightarrow> In a xs \<or> In a ys"
   apply (induction xs)
