@@ -92,4 +92,9 @@ fun bval :: "state \<Rightarrow> bexpr \<Rightarrow> bool" where
 | "bval st (BNot b1) = negb (bval st b1)"
 | "bval st (BAnd b1 b2) = andb (bval st b1) (bval st b2)"
 
+subsection {* Notation *}
+
+definition bool_to_bexpr :: "Basics.bool \<Rightarrow> bexpr" where
+  "bool_to_bexpr b = (if b = True then BTrue else BFalse)"
+
 end
