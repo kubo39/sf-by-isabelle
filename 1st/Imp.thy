@@ -102,10 +102,10 @@ section {* Command *}
 datatype com = CSkip ("SKIP") |
                CAss string aexpr ("_ ::= _" [1000, 60] 60) |
                CSeq com com ("_ ;;/ _" [80, 81] 80) |
-               CIf bexpr com com ("(IF _/ THEN _/ ELSE _)" [0, 0, 81] 80) |
+               CIf bexpr com com ("IFB _/ THEN _/ ELSE _/ FI" [0, 0, 81] 80) |
                CWhile bexpr com com ("WHILE _/ DO _/ END" [0, 81] 80)
 
 value "SKIP"
-value "IF BTrue THEN SKIP ELSE SKIP"
+value "IFB BTrue THEN SKIP ELSE SKIP FI"
 
 end
