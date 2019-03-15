@@ -50,17 +50,14 @@ lemma test_optimize_0plus:
   done
 
 theorem optimize_0plus_sound: "aeval (optimize_0plus a) = aeval a"
-  apply (induct a)
+  apply (induction a)
      apply (simp) (* ANum *)
     apply (case_tac a) (* APlus *)
        apply (case_tac a1) (* a1 = ANum n *)
-          apply (simp)
+          apply (simp_all)
   oops
 
 section {* Expression with variables *}
-
-hide_type aexp
-hide_type bexp
 
 datatype aexpr = ANum nat |
                  AId string |
@@ -92,6 +89,8 @@ fun bval :: "state \<Rightarrow> bexpr \<Rightarrow> bool" where
 | "bval st (BNot b1) = negb (bval st b1)"
 | "bval st (BAnd b1 b2) = andb (bval st b1) (bval st b2)"
 
+value "aval (\<lambda> x. 0) (APlus (ANum 3) (AId ''v''))"
+
 subsection {* Notation *}
 
 definition bool_to_bexpr :: "Basics.bool \<Rightarrow> bexpr" where
@@ -100,12 +99,17 @@ definition bool_to_bexpr :: "Basics.bool \<Rightarrow> bexpr" where
 section {* Command *}
 
 datatype com = CSkip ("SKIP") |
-               CAss string aexpr ("_ ::= _" [1000, 60] 60) |
-               CSeq com com ("_ ;;/ _" [80, 81] 80) |
-               CIf bexpr com com ("IFB _/ THEN _/ ELSE _/ FI" [0, 0, 81] 80) |
-               CWhile bexpr com com ("WHILE _/ DO _/ END" [0, 81] 80)
+               CAss string aexpr ("_ ::= _" [1000, 61] 61) |
+               CSeq com com ("_;;/ _" [60, 61] 60) |
+               CIf bexpr com com ("(IFB _/ THEN _/ ELSE _/ FI)" [0, 0, 61] 60) |
+               CWhile bexpr com com ("(WHILE _/ DO _/ END)" [0, 61] 61)
 
 value "SKIP"
 value "IFB BTrue THEN SKIP ELSE SKIP FI"
+
+value "
+''z'' ::= (Aid ''x'');;
+SKIP
+"
 
 end
