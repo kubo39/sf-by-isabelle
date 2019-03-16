@@ -104,7 +104,7 @@ theorem not_both_true_and_false: "\<not>(P \<and> \<not>P)"
   done
 
 theorem not_true_is_false: "b \<noteq> True \<longrightarrow> b = False"
-  apply (case_tac b)
+  apply (cases b)
    apply (simp_all)
   done
 
