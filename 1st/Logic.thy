@@ -126,7 +126,7 @@ theorem iff_sym: "\<forall> P Q. iff P Q \<longrightarrow> iff Q P"
   done
 
 lemma not_true_iff_false: "b \<noteq> bool.True \<longleftrightarrow> b = bool.False"
-  apply (case_tac b)
+  apply (cases b)
    apply (simp_all)
   done
 
