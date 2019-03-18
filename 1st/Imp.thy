@@ -65,6 +65,11 @@ datatype aexpr = ANum nat |
                  AMinus aexpr aexpr |
                 AMult aexpr aexpr
 
+definition W :: string where "W = ''W''"
+definition X :: string where "X = ''X''"
+definition Y :: string where "Y = ''Y''"
+definition Z :: string where "Z = ''Z''"
+
 datatype bexpr = BTrue |
                 BFalse |
                 BEq aexpr aexpr |
@@ -108,7 +113,7 @@ value "SKIP"
 value "IFB BTrue THEN SKIP ELSE SKIP FI"
 
 value "
-''z'' ::= (Aid ''x'');;
+Z ::= (Aid X);;
 SKIP
 "
 
