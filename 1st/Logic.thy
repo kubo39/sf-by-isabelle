@@ -153,8 +153,9 @@ lemma or_assoc: "\<forall> P Q R. P \<or> (Q \<or> R) \<longleftrightarrow> (P \
 
 subsubsection {* Existential Quantification*}
 
-lemma four_is_even: "\<exists> n::nat. 4 = n + n"
-  oops
+lemma four_is_even: "\<exists> n::nat. n + n = 4"
+  apply presburger
+  done
 
 subsubsection {* Programming with Propisition *}
 
