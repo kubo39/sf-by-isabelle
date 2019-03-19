@@ -52,9 +52,8 @@ lemma test_optimize_0plus:
 theorem optimize_0plus_sound: "aeval (optimize_0plus a) = aeval a"
   apply (induction a)
      apply (simp) (* ANum *)
-    apply (case_tac a) (* APlus *)
-       apply (case_tac a1) (* a1 = ANum n *)
-          apply (simp_all)
+    apply (cases a) (* APlus *)
+       apply (simp)
   oops
 
 section {* Expression with variables *}
@@ -112,9 +111,24 @@ datatype com = CSkip ("SKIP") |
 value "SKIP"
 value "IFB BTrue THEN SKIP ELSE SKIP FI"
 
-value "
-Z ::= (Aid X);;
-SKIP
+(*
+definition fact_in_isabelle :: com where
+ "fact_in_isabelle =
+    Z ::= AId X;;
+    Y ::= ANum 1;;
+    WHILE BNot (BEq (AId Z) (ANum 0)) DO (
+      Y ::= AMult (AId Y) (AId Z);;
+      Z ::= AMinus (AId Z) (ANum 1)
+    ) END
+"
+*)
+
+definition plus2 :: com where "plus2 = X ::= (APlus (AId X) (ANum 2))"
+definition XtimesYinZ :: com where "XtimesYinZ = Z ::= (AMult (AId X) (AId Y))"
+definition subtract_slowly_body :: com where
+  "subtract_slowly_body =
+     Z ::= AMinus (AId Z) (ANum 1);;
+     X ::= AMinus (AId X) (ANum 1)
 "
 
 end
